@@ -1,0 +1,78 @@
+# Taken From ChatGPT
+
+# Node.js dependencies
+/node_modules
+
+# Build directories
+/build
+/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Parcel cache (if using Parcel as a bundler)
+.cache
+
+# Mac-specific files
+*.DS_Store
+
+# Coverage directory used by testing tools like jest
+/coverage
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Service worker output
+/service-worker.js
+
+# Static files cache
+/static
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Storybook files (if using Storybook)
+/out
+.storybook/coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Yarn berry cache
+/.yarn/cache/
+/.yarn/unplugged/
+/.yarn/build-state.yml
+/.yarn/install-state.gz
+
+# React Native specific files
+.expo/
+
