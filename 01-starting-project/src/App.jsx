@@ -1,5 +1,5 @@
 import reactImg from "./assets/react-core-concepts.png";
-import compImg from "./assets/components.png";
+import { CONCEPT_ITEMS } from "./data.js";
 
 const startingWords = ["Fundamental", "Crucial", "Core"];
 
@@ -25,12 +25,12 @@ function MyFirstComp() {
 }
 
 // Declaration of props component
-function CoreConceptsItem(props) {
+function CoreConceptsItem({ img, title, description }) {
     return (
     <li>
-        <img src={props.inpImg} alt={`${props.inpTitle}} Image`} />
-        <h3>{props.inpTitle}</h3>
-        <p>{props.inpDescr}</p>
+        <img src={img} alt={`${title}} Image`} />
+        <h3>{title}</h3>
+        <p>{description}</p>
     </li>
 );
 }
@@ -43,12 +43,10 @@ function App() {
                 <section id="core-concepts">
                     <h2>Core Concepts</h2>
                     <ul>
-                        {/* Inserting data into props component */}
-                        <CoreConceptsItem
-                            inpImg={compImg}
-                            inpTitle="Components"
-                            inpDescr="The Core UI building block"
-                        />
+                        <CoreConceptsItem {...CONCEPT_ITEMS[0]}/>
+                        <CoreConceptsItem {...CONCEPT_ITEMS[1]}/>
+                        <CoreConceptsItem {...CONCEPT_ITEMS[2]}/>
+                        <CoreConceptsItem {...CONCEPT_ITEMS[3]}/>
                     </ul>
                 </section>
                 <h2>Time to get started!</h2>
