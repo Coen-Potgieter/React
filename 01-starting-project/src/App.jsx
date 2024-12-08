@@ -4,7 +4,15 @@ import TabButton from "./components/TabButton.jsx";
 
 import { CONCEPT_ITEMS } from "./data.js";
 
+
 function App() {
+    console.log("APP BEING RENDERED");
+    let buttonContent = "No Button Has Been Clicked";
+    function handleClick(selectedButton) {
+        buttonContent = selectedButton;
+        console.log(selectedButton);
+    }
+
     return (
         <div>
             <Header/>
@@ -21,11 +29,12 @@ function App() {
                 <section id="examples">
                     <h2>Examples</h2>
                     <menu>
-                        <TabButton>Component</TabButton>
-                        <TabButton>JSX</TabButton>
-                        <TabButton>Props</TabButton>
-                        <TabButton>State</TabButton>
+                        <TabButton onSelect={() => handleClick("components")}>Component</TabButton>
+                        <TabButton onSelect={() => handleClick("jsx")}>JSX</TabButton>
+                        <TabButton onSelect={() => handleClick("props")}>Props</TabButton>
+                        <TabButton onSelect={() => handleClick("state")}>State</TabButton>
                     </menu>
+                    {buttonContent}
                 </section>
             </main>
         </div>
