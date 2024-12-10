@@ -19,6 +19,12 @@ html {
   min-height: 80rem;
 }
 
+main {
+  width: 90%;
+  max-width: 50rem;
+  margin: auto;
+}
+
 header {
   text-align: center;
   margin: 3rem 0;
@@ -45,12 +51,6 @@ header p {
   font-size: 1.25rem;
   color: #8964b0;
   font-family: "Roboto Condensed", sans-serif;
-}
-
-main {
-  width: 90%;
-  max-width: 50rem;
-  margin: auto;
 }
 
 #core-concepts {
@@ -140,6 +140,7 @@ main h2 {
   background-color: #2f1d43;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 
 #tab-content h3 {
   margin: 0;
