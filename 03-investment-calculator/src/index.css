@@ -87,6 +87,14 @@ body {
     color: #c2e9e0;
 }
 
+#error-message {
+    text-align: center;
+    color: #83e6c0;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .center {
     text-align: center;
 }
