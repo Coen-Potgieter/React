@@ -1,7 +1,5 @@
 import { createPortal } from "react-dom";
 
-export { createPortal } from "react-dom";
-
 export default function ResultModal({ targetTime, ref, remainingTime, onReset}) {
 
     const userLost = remainingTime <= 0;
