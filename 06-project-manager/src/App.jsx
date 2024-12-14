@@ -1,6 +1,7 @@
 import Header from "./components/Header.jsx";
 import SideBar from "./components/SideBar.jsx";
-import ProjectSection from "./components/ProjectSection.jsx";
+import ProjectAddSection from "./components/ProjectAddSection.jsx";
+import ProjectViewSection from "./components/ProjectViewSection.jsx";
 import StatusPopup from "./components/StatusPopup.jsx";
 
 import { useState, useRef } from "react";
@@ -15,12 +16,12 @@ const TEST_STARTING_PROJ = [
 function App() {
     const [ showSideBar, setShowSideBar ] = useState(false);
     const [ projectsData, setProjectsData ] = useState(TEST_STARTING_PROJ);
-    const [ showPopUp, setShowPopUp ] = useState(false);
+    const [ showAddedPopup, setShowAddedPopup ] = useState(false);
+    const [ selectedProject, setSelectedProject ] = useState(-1);
 
     function handleSideBarToggle() {
         setShowSideBar((prevState) => !prevState);
     }
-
 
     function addProject(newProject) {
         setProjectsData((prevData) => {
@@ -30,28 +31,24 @@ function App() {
             return newProjectsData;
         });
 
-        // TODO: Add success pop-up
-        setShowPopUp(true);
-        setTimeout(() => {setShowPopUp(false)}, 3000);
+        setShowAddedPopup(true);
+        setTimeout(() => {setShowAddedPopup(false)}, 3000);
         console.log("added project");
         console.log(projectsData);
     }
 
-
+    function handleProjectSelect(projectIdx) {
+        setSelectedProject(projectIdx);
+    }
 
     return (
         <div className="flex">
-            <SideBar data={projectsData} onClose={handleSideBarToggle} isOpen={showSideBar}/>
-            {showPopUp && <StatusPopup />}
+            <SideBar data={projectsData} onToggle={handleSideBarToggle} isOpen={showSideBar} onProjSelect={handleProjectSelect}/>
+            {showAddedPopup && <StatusPopup col="bg-emerald-600" message="Project Successfully Added"/>}
             <section className="flex flex-col items-center">
                 <Header />
-                <button 
-                    className="bg-stone-900 text-stone-50 hover:bg-stone-50 hover:text-stone-900 m-5 p-10 w-1/6"
-                    onClick={handleSideBarToggle}
-                >
-                    Toggle Sidebar
-                </button>
-                <ProjectSection onAddProject={addProject}/>
+                {selectedProject <= -1 && <ProjectAddSection onAddProject={addProject} />}
+                {selectedProject > -1 && <ProjectViewSection />}
             </section>
         </div>
     );
