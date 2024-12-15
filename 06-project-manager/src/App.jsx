@@ -41,6 +41,10 @@ function App() {
         setSelectedProject(projectIdx);
     }
 
+
+    const projectData = (selectedProject >= 0) ? projectsData[selectedProject] : null;
+    console.log(projectData);
+
     return (
         <div className="flex">
             <SideBar data={projectsData} onToggle={handleSideBarToggle} isOpen={showSideBar} onProjSelect={handleProjectSelect}/>
@@ -48,7 +52,7 @@ function App() {
             <section className="flex flex-col items-center">
                 <Header />
                 {selectedProject <= -1 && <ProjectAddSection onAddProject={addProject} />}
-                {selectedProject > -1 && <ProjectViewSection />}
+                {selectedProject > -1 && <ProjectViewSection projectData={projectData}/>}
             </section>
         </div>
     );
