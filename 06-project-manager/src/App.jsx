@@ -41,14 +41,13 @@ function App() {
         setSelectedProject(projectIdx);
     }
 
-
     const projectData = (selectedProject >= 0) ? projectsData[selectedProject] : null;
     console.log(projectData);
 
     return (
         <div className="flex">
             <SideBar data={projectsData} onToggle={handleSideBarToggle} isOpen={showSideBar} onProjSelect={handleProjectSelect}/>
-            {showAddedPopup && <StatusPopup col="bg-emerald-600" message="Project Successfully Added"/>}
+            {showAddedPopup && <StatusPopup col={{ bg: "bg-emerald-600", text: "text-my-beige" }} message="Project Successfully Added"/>}
             <section className="flex flex-col items-center">
                 <Header />
                 {selectedProject <= -1 && <ProjectAddSection onAddProject={addProject} />}

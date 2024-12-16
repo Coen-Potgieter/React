@@ -7,11 +7,11 @@ export default function StatusPopup({ col, message }) {
     return createPortal(
         <dialog
             open
-            className={`flex items-center justify-center h-12 w-24 ${col} 
-animate-fadeIn duration-500 ease-out opacity-100`}
+            className={`flex items-center rounded-lg p-4 justify-center size-fit bottom-10  
+animate-dropInOut ${col.bg}`}
         >
             <label
-                className="text-xl font-bold underline"
+                className={`text-2xl ${col.text}`}
             >
                 {message}
             </label>

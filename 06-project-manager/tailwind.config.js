@@ -17,14 +17,14 @@ export default {
                     "0%, 100%": {color: "rgb(255, 0, 0)"},
                     "50%": {color: "rgb(0, 0, 255)"},
                 },
-                fadeIn: {
-                    "0%": {opacity: "0"},
-                    "100%": {opacity: "1"},
+                dropInOut: {
+                    "0%, 100%": {opacity: "0", transform: "translateY(-20px)"},
+                    "16.67%, 83.33%": {opacity: "0.9", transform: "translateY(0)"},
                 },
             },
             animation: {
                 pulseText: "pulseText 2s ease-in-out infinite",
-                fadeIn: "fadeIn 0.5s ease-out",
+                dropInOut: "dropInOut 3s ease-out forwards",
             },
         },
 
