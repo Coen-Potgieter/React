@@ -4,12 +4,12 @@ import MenuIcon from "../custom-svgs/MenuIcon.jsx"
 
 export default function SideBar({ data, onToggle, isOpen, onProjSelect }) {
 
-    let sideBarClass = "flex flex-col m-0 border-e-2 border-e-black left-0 h-screen w-1/6 bg-emerald-800 bg-opacity-80 hover:bg-opacity-100 transform transition-transform duration-300 ease-in-out";
+    let sideBarTransitionClass;
 
     if (isOpen) {
-        sideBarClass += " translate-x-0";
+        sideBarTransitionClass += " translate-x-2";
     } else {
-        sideBarClass += " -translate-x-full";
+        sideBarTransitionClass += " ring-opacity-0 -translate-x-full";
     }
 
     return createPortal(
@@ -26,22 +26,30 @@ export default function SideBar({ data, onToggle, isOpen, onProjSelect }) {
                 </dialog>
             )}
             <dialog 
-                className={sideBarClass}>
+                className={`
+flex flex-col m-0 top-1 ring-4 ring-black left-0 h-screen w-1/6 rounded-lg
+bg-yellow-50 bg-opacity-100 text-my-green hover:text-gray-700 hover:font-bold
+transform transition-transform duration-300 ease-in-out
+${sideBarTransitionClass}`}>
                 <div 
                     className="flex justify-end pe-2 pt-2"
                 >
                     <button 
-                        className="text-2xl text-white hover:text-stone-400"
+                        className="text-2xl font-mono hover:underline"
                         onClick={onToggle}>
-                        X
+                        x
                     </button >
                 </div>
                 <div
-                    className="flex flex-col gap-0 mt-10"
+                    className="flex flex-col gap-3 mt-4"
                 >
                     {data.map((project, projectIdx) => (
                         <button key={projectIdx}
-                            className="bg-yellow-600 text-stone-300 font-mono text-2xl w-full py-3 hover:underline hover:font-bold"
+                            className={`
+py-3 ml-1 mr-1 
+bg-transparent rounded-2xl ring-4 ring-my-green
+text-my-dark-orange font-mono font-normal text-xl
+hover:bg-my-green hover:text-my-dark-orange`}
                             onClick={() => onProjSelect(projectIdx)}
                         >
                             {project.name}

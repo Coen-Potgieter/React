@@ -1,4 +1,3 @@
-
 export default function Headaer() {
     return (
         <header className="flex flex-col items-center w-screen gap-8">

@@ -1,8 +1,9 @@
 import TrashIcon from "../custom-svgs/TrashIcon.jsx";
 import ClearIcon from "../custom-svgs/ClearIcon.jsx";
 import AddIcon from "../custom-svgs/AddIcon.jsx";
+import EditIcon from "../custom-svgs/EditIcon.jsx";
 
-export default function ProjectButton({ type, isDisabled, ...props }){
+export default function ProjectButton({ type, isDisabled, inputDisabled=false, ...props }){
 
     let btnText;
     let icon;
@@ -20,6 +21,12 @@ export default function ProjectButton({ type, isDisabled, ...props }){
         btnText = "Clear";
         icon =  <ClearIcon lineWidth={1.2} className="w-12" />;
         btnTypeClass = "hover:text-red-700";
+
+    } else if (type == "edit") {
+        btnText = inputDisabled ? "Edit" : "Save";
+        icon = <EditIcon lineWidth={1.5} className="w-12" />;
+        btnTypeClass = "pl-2 hover:text-yellow-700";
+        btnTypeClass += inputDisabled ? "" : " ring-my-green hover:text-my-green"
 
     } else {
         btnText = "Type Not Supported";
@@ -42,7 +49,7 @@ ${btnDisabledClass} ${btnTypeClass}
         >
             {icon}
             <label 
-                className="ml-14 text-2xl font-mono"
+                className="ml-14 text-2xl font-mono cursor-pointer"
             >
                 {btnText}
             </label>

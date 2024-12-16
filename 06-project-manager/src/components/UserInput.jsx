@@ -3,8 +3,8 @@
 export default function UserInput({ ref, label, InputElem, className, ...props}) {
 
     return (
-        <div className="flex justify-around gap-20"> 
-            <label className="text-xl font-mono text-my-dark-orange">
+        <div className="flex w-full  justify-between">
+            <label className="w-1/2 text-xl font-mono text-my-dark-orange">
                 {label}
             </label>
             <InputElem 

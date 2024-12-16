@@ -14,8 +14,12 @@ export default {
             },
             keyframes: {
                 pulseText: {
-                    "0%, 100%": {color: "rgb(255, 0, 0)"},
-                    "50%": {color: "rgb(0, 0, 255)"},
+                    "0%, 100%": {color: "rgb(168, 162, 158)"},
+                    "50%": {color: "rgb(0,0,0)"},
+                },
+                pulseBorder: {
+                    "0%, 100%": {borderColor: "rgb(168, 162, 158)"},
+                    "50%": {borderColor: "rgb(0,0,0)"},
                 },
                 dropInOut: {
                     "0%, 100%": {opacity: "0", transform: "translateY(-20px)"},
@@ -24,6 +28,7 @@ export default {
             },
             animation: {
                 pulseText: "pulseText 2s ease-in-out infinite",
+                pulseBorder: "pulseRing 2s ease-in-out infinite",
                 dropInOut: "dropInOut 3s ease-out forwards",
             },
         },

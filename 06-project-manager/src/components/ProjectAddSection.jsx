@@ -30,7 +30,7 @@ export default function ProjectAddSection({ onAddProject }) {
         const newProject = {
             name: projectNameInpt.current.value,
             description: projectDescriptionInpt.current.value,
-            date: projectDateInpt.current.value,
+            dateStarted: projectDateInpt.current.value,
         };
         onAddProject(newProject);
         handleClearInputs();
@@ -45,44 +45,43 @@ export default function ProjectAddSection({ onAddProject }) {
 
     return (
         <>
-            {showErrorPopup && <StatusPopup col={{ bg: "bg-red-600", text: "text-my-beige" }} message="Fill In All The Feilds" />}
-            <div
-                className="flex flex-col h-fit w-screen"
+            {showErrorPopup && <StatusPopup col={{ bg: "bg-red-400", text: "text-my-beige" }} message="Missing Feilds" />}
+            <div 
+                className={` 
+flex flex-col w-2/5 h-fit mt-10 gap-10 
+items-start justify-center placeholder-amber-700`}
             >
-                <div 
-                    className="flex flex-col items-center justify-center placeholder-amber-700 ml-96 w-fit mt-10 gap-10"
-                >
-                    <UserInput 
-                        InputElem="input" 
-                        label="Project Name:" 
-                        ref={projectNameInpt} 
-                        placeholder="Space Invaders"
-                        type="text"
+                <UserInput 
+                    InputElem="input" 
+                    type="text"
+                    label="Project Name:" 
+                    ref={projectNameInpt} 
+                    placeholder="Space Invaders"
+                />
+                <UserInput 
+                    InputElem="textarea" 
+                    label="Project Description:" 
+                    placeholder="Recreated Space Invaders in Python"
+                    ref={projectDescriptionInpt} 
+                    autoComplete="on"
+                    autoCorrect="on"
+                    cols="30"
+                    spellCheck="true"
+                    className="h-24"
+                />
+                <UserInput 
+                    InputElem="input" 
+                    type="date"
+                    label="Date Started:" 
+                    ref={projectDateInpt} 
+                />
+                <div className="flex w-full justify-between px-6">
+                    <ProjectButton type="clear" onClick={handleClearInputs}/>
+                    <ProjectButton 
+                        type="add" 
+                        onClick={handleAddProject}
+                        isDisabled={showErrorPopup}
                     />
-                    <UserInput 
-                        InputElem="textarea" 
-                        label="Project Description:" 
-                        placeholder="Recreated Space Invaders in Python"
-                        ref={projectDescriptionInpt} 
-                        autocomplete="on"
-                        cols="30"
-                        spellcheck="true"
-                        className="h-24"
-                    />
-                    <UserInput 
-                        InputElem="input" 
-                        label="Date Started:" 
-                        ref={projectDateInpt} 
-                    />
-                    <div className="flex w-full justify-between px-6">
-                        <ProjectButton type="clear" onClick={handleClearInputs}/>
-                        <ProjectButton 
-                            type="add" 
-                            onClick={handleAddProject}
-                            isDisabled={showErrorPopup}
-                        />
-                    </div>
-                    <ProjectButton type="delete" />
                 </div>
             </div>
         </>
