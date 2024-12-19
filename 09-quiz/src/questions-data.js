@@ -29,6 +29,11 @@ export const QUESTIONS = {
                 a: "1989",
                 possibleAns: ["1989", "1987", "1991", "1979"],
             },
+            {
+                q: null,
+                a: null,
+                possibleAns: [null],
+            },
         ],
     },
 
@@ -39,6 +44,11 @@ export const QUESTIONS = {
                 q: "Fill in",
                 a: "fill in",
                 possibleAns: [ "1939", "1940", "1935", "1919"],
+            },
+            {
+                q: null,
+                a: null,
+                possibleAns: [null],
             },
         ],
     },
@@ -51,6 +61,11 @@ export const QUESTIONS = {
                 a: "fill in",
                 possibleAns: [ "1939", "1940", "1935", "1919"],
             },
+            {
+                q: null,
+                a: null,
+                possibleAns: [null],
+            },
         ],
     },
 
@@ -61,6 +76,11 @@ export const QUESTIONS = {
                 q: "Fill in",
                 a: "fill in",
                 possibleAns: [ "1939", "1940", "1935", "1919"],
+            },
+            {
+                q: null,
+                a: null,
+                possibleAns: [null],
             },
         ],
     },

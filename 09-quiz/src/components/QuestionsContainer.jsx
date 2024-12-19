@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import Tabs from "./Tabs.jsx";
-import Question from "./Question.jsx";
+import StartView from "./StartView.jsx";
+import QuestionView from "./QuestionView.jsx";
+import EndView from "./EndView.jsx";
+import ResultsModal from "./ResultsModal.jsx";
 import { QuestionsContext } from "../context/questions-context.jsx";
 import { findIsShowingTopic, topicCols } from "../helper.js";
 
@@ -10,7 +13,8 @@ export default function QuestionsContainer({ topics }) {
 
     // This state will manage the times it took to complete each question
     const [ completedTimes, setCompletedTimes ] = useState([]);
-    const [ showingQuestions, setShowingQuestions ] = useState(false);
+    const [ modalIsOpen, setModalIsOpen ] = useState(false);
+    const [ viewMode, setViewMode ] = useState("start");
     const { questions } = useContext(QuestionsContext);
 
 
@@ -28,42 +32,55 @@ export default function QuestionsContainer({ topics }) {
         setCompletedTimes([]);
     }
 
-    function handleToggleShowQeustions() {
-        setShowingQuestions((prevState) => !prevState);
+    function handleOpenModal() {
+        setModalIsOpen(true);
+    }
+    function handleCloseModal() {
+        setModalIsOpen(false);
     }
 
+    function handleChangeVeiwMode(viewMode) {
+        if (viewMode === "results") {
+            handleOpenModal();
+            viewMode = "start";
+        } else if (viewMode === "questions") {
+            setCompletedTimes([]);
+        }
+        setViewMode(viewMode);
+    }
+
+    useEffect(() => {
+        if (completedTimes.length === (questions[currentTopic].questions.length - 1)) {
+            handleChangeVeiwMode("end");
+        }
+
+    }, [completedTimes]);
+
+
+
     return (
-        <section 
-            className={`bg-radial-gradient
+        <>
+            <ResultsModal isOpen={modalIsOpen} onClose={handleCloseModal}/>
+            <section 
+                className={`bg-radial-gradient
 flex flex-col h-fit w-1/2 mx-auto mt-10 gap-5
 items-center 
 ring-4 ${topicCols.ring.static[currentTopic]} ring-opacity-80
 `}
-        >
-            {!showingQuestions && <Tabs topics={topics}/>}
-            <div className="flex flex-col items-center font-inconsolata font-bold">
-                <h2 className="text-3xl">
-                    Current Topic: 
-                </h2>
-                <h2 className="text-4xl"> 
-                    <u className={topicCols.text.static[currentTopic]}>{currentTopic}</u>
-                </h2>
-            </div>
-
-            {!showingQuestions && (
-                <button
-                    onClick={handleToggleShowQeustions}
-                    className={`
-mb-5 mt-10 size-fit px-5 py-2
-rounded-full ring-4 ${topicCols.ring.static[currentTopic]}
-text-3xl font-semibold ${topicCols.text.static[currentTopic]}
-hover:font-extrabold hover:underline
-`}
-                >
-                    Begin Quiz
-                </button>
-            )}
-            {showingQuestions && <Question questionNum={completedTimes.length} onAddTime={addTime} />}
-        </section>
+            >
+                {(viewMode === "start") && <Tabs topics={topics}/>}
+                {(viewMode === "start") && <StartView currentTopic={currentTopic} onStart={handleChangeVeiwMode} />}
+                {(viewMode === "questions") && <QuestionView questionNum={completedTimes.length} onAddTime={addTime} />}
+                {(viewMode === "end") && <EndView currentTopic={currentTopic} onChangeView={handleChangeVeiwMode} />}
+            </section>
+        </>
     );
 }
+
+
+
+
+
+
+
+
