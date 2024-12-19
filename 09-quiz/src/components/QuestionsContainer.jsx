@@ -60,7 +60,7 @@ export default function QuestionsContainer({ topics }) {
 
     return (
         <>
-            <ResultsModal isOpen={modalIsOpen} onClose={handleCloseModal}/>
+            <ResultsModal isOpen={modalIsOpen} onClose={handleCloseModal} currentTopic={currentTopic}/>
             <section 
                 className={`bg-radial-gradient
 flex flex-col h-fit w-1/2 mx-auto mt-10 gap-5
