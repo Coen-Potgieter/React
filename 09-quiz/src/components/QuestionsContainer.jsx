@@ -40,7 +40,7 @@ items-center
 ring-4 ${topicCols.ring.static[currentTopic]} ring-opacity-80
 `}
         >
-            <Tabs topics={topics}/>
+            {!showingQuestions && <Tabs topics={topics}/>}
             <div className="flex flex-col items-center font-inconsolata font-bold">
                 <h2 className="text-3xl">
                     Current Topic: 
@@ -55,15 +55,15 @@ ring-4 ${topicCols.ring.static[currentTopic]} ring-opacity-80
                     onClick={handleToggleShowQeustions}
                     className={`
 mb-5 mt-10 size-fit px-5 py-2
-rounded-full ring-4 ring-my-teal
-text-3xl font-bold text-my-teal
-hover:underline ${topicCols.text.hover[currentTopic]} ${topicCols.ring.hover[currentTopic]}
+rounded-full ring-4 ${topicCols.ring.static[currentTopic]}
+text-3xl font-semibold ${topicCols.text.static[currentTopic]}
+hover:font-extrabold hover:underline
 `}
                 >
                     Begin Quiz
                 </button>
             )}
-            {showingQuestions && <Question questionNum={completedTimes.length} />}
+            {showingQuestions && <Question questionNum={completedTimes.length} onAddTime={addTime} />}
         </section>
     );
 }

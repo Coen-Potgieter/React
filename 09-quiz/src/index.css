@@ -23,6 +23,28 @@ body {
   background-position: center;
 }
 
+#progress-bar {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#progress-bar::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+.History::-webkit-progress-value {
+    background-color: #faeb2c;
+}
+.Geography::-webkit-progress-value {
+    background-color: #B4FFB2;
+}
+.React::-webkit-progress-value {
+    background-color: #e900ff;
+}
+.Coen::-webkit-progress-value {
+    background-color: #FF9316;
+}
 
 @tailwind base;
 @tailwind components;

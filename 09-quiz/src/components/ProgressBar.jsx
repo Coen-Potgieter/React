@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function ProgressBar({ maxTime, onTimeCompleted }) {
-
+export default function ProgressBar({ maxTime, isNewQuestion, onTimeCompleted, ...props }) {
     const [ timeRemaining, setTimeRemaining ] = useState(maxTime);
 
     useEffect(() => {
@@ -11,14 +10,16 @@ export default function ProgressBar({ maxTime, onTimeCompleted }) {
 
         return () => {
             clearInterval(interval);
+            setTimeRemaining(maxTime);
         };
-    }, []);
+    }, [isNewQuestion]);
 
     return (
         <progress
-            className="w-full text-my-teal bg-my-teal"
+            id="progress-bar"
             value={timeRemaining}
             max={maxTime}
+            {...props}
         />
     )
 }
