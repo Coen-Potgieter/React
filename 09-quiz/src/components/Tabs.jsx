@@ -1,13 +1,8 @@
 import { useContext } from "react";
 import { QuestionsContext } from "../context/questions-context.jsx";
 
-export const topicCols = {
-    History: "hover:bg-history-col",
-    Geography: "hover:bg-geography-col",
-    React: "hover:bg-react-col",
-    Coen: "hover:bg-coen-col",
-}
 
+import { topicCols } from "../helper.js";
 export default function Tabs() {
 
     const { questions, handleChangeTopic } = useContext(QuestionsContext);
@@ -24,7 +19,7 @@ export default function Tabs() {
                     onClick={() => handleChangeTopic(topic)}
                     className={`
 w-full text-xl p-2 
-${topicCols[topic]}`}
+${topicCols.bg.hover[topic]}`}
                 >
                     {topic}
                 </button>

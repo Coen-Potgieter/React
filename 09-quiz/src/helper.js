@@ -23,3 +23,48 @@ export function shuffleArray(array) {
     }
 
 }
+
+export const topicCols = {
+    text: {
+        static: {
+            History: "text-history-col",
+            Geography: "text-geography-col",
+            React: "text-react-col",
+            Coen: "text-coen-col",
+        },
+        hover: {
+            History: "hover:text-history-col",
+            Geography: "hover:text-geography-col",
+            React: "hover:text-react-col",
+            Coen: "hover:text-coen-col",
+        },
+    },
+    bg: {
+        static: {
+            History: "bg-history-col",
+            Geography: "bg-geography-col",
+            React: "bg-react-col",
+            Coen: "bg-coen-col",
+        },
+        hover: {
+            History: "hover:bg-history-col",
+            Geography: "hover:bg-geography-col",
+            React: "hover:bg-react-col",
+            Coen: "hover:bg-coen-col",
+        },
+    },
+    ring: {
+        static: {
+            History: "ring-history-col",
+            Geography: "ring-geography-col",
+            React: "ring-react-col",
+            Coen: "ring-coen-col",
+        },
+        hover: {
+            History: "hover:ring-history-col",
+            Geography: "hover:ring-geography-col",
+            React: "hover:ring-react-col",
+            Coen: "hover:ring-coen-col",
+        },
+    },
+}

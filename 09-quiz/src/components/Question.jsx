@@ -2,16 +2,10 @@ import { useContext } from "react";
 
 import { shuffleArray } from "../helper.js";
 import { QuestionsContext } from "../context/questions-context.jsx";
-import { findIsShowingTopic } from "../helper.js";
+import { findIsShowingTopic, topicCols } from "../helper.js";
 import ProgressBar from "./ProgressBar.jsx";
 
-const topicColsOnHover = {
-    History: "hover:text-history-col",
-    Geography: "hover:text-geography-col",
-    React: "hover:text-react-col",
-    Coen: "hover:text-coen-col",
-}
-
+const MAX_TIME = 3000;
 export default function Question({ questionNum }) {
 
     // Here we chaning the state value without calling a state updatin function?
@@ -41,14 +35,14 @@ mx-auto w-11/12 mb-5
                         key={choice}
                         className={`
 text-2xl rounded-xl ring-4 ring-my-purple
-hover:underline ${topicColsOnHover[currentTopic]}
+hover:underline ${topicCols.text.hover[currentTopic]}
 `}
                     >
                         {choice}
                     </button>
                 ))}
             </div>
-            <ProgressBar />
+            <ProgressBar maxTime={MAX_TIME} />
         </section>
     );
 }
