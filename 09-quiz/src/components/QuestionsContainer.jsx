@@ -9,6 +9,7 @@ import { QuestionsContext } from "../context/questions-context.jsx";
 import { findIsShowingTopic, topicCols } from "../helper.js";
 
 
+const MAX_TIME = 15 * 1000;
 export default function QuestionsContainer({ topics }) {
 
     // This state will manage the times it took to complete each question
@@ -56,11 +57,9 @@ export default function QuestionsContainer({ topics }) {
 
     }, [completedTimes]);
 
-
-
     return (
         <>
-            {modalIsOpen && <ResultsModal onClose={handleCloseModal} currentTopic={currentTopic} times={completedTimes}/>}
+            {modalIsOpen && <ResultsModal maxTime={MAX_TIME} onClose={handleCloseModal} currentTopic={currentTopic} times={completedTimes}/>}
             <section 
                 className={`bg-radial-gradient
 flex flex-col h-fit w-1/2 mx-auto mt-10 gap-5
@@ -70,7 +69,7 @@ ring-4 ${topicCols.ring.static[currentTopic]} ring-opacity-80
             >
                 {(viewMode === "start") && <Tabs topics={topics}/>}
                 {(viewMode === "start") && <StartView currentTopic={currentTopic} onStart={handleChangeVeiwMode} />}
-                {(viewMode === "questions") && <QuestionView questionNum={completedTimes.length} onAddTime={addTime} />}
+                {(viewMode === "questions") && <QuestionView maxTime={MAX_TIME} questionNum={completedTimes.length} onAddTime={addTime} />}
                 {(viewMode === "end") && <EndView currentTopic={currentTopic} onChangeView={handleChangeVeiwMode} />}
             </section>
         </>

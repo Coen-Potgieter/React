@@ -14,6 +14,11 @@ export default function ProgressBar({ maxTime, isNewQuestion, onTimeCompleted, .
         };
     }, [isNewQuestion]);
 
+    if (timeRemaining <= 0) {
+        onTimeCompleted(-1);
+        setTimeRemaining(maxTime);
+
+    }
     return (
         <progress
             id="progress-bar"

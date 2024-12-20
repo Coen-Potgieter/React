@@ -5,8 +5,7 @@ import { QuestionsContext } from "../context/questions-context.jsx";
 import { findIsShowingTopic, topicCols } from "../helper.js";
 import ProgressBar from "./ProgressBar.jsx";
 
-const MAX_TIME = 3000;
-export default function QuestionView({ questionNum, onAddTime }) {
+export default function QuestionView({ questionNum, onAddTime, maxTime }) {
 
     const progressRef = useRef();
     const { questions } = useContext(QuestionsContext);
@@ -43,7 +42,7 @@ export default function QuestionView({ questionNum, onAddTime }) {
                 className="flex flex-col w-5/6 items-center mb-10 bg-white bg-opacity-10 rounded-xl"
             >
                 <h3
-                    className="text-3xl my-5"
+                    className="text-3xl my-5 text-center"
                 >
                     {data.q}
                 </h3>
@@ -67,7 +66,12 @@ hover:font-extrabold ${topicCols.text.hover[currentTopic]} ${topicCols.ring.hove
                         </button>
                     ))}
                 </div>
-                <ProgressBar isNewQuestion={questionNum} maxTime={MAX_TIME} className={currentTopic} ref={progressRef}/>
+                <ProgressBar 
+                    onTimeCompleted={onAddTime}
+                    isNewQuestion={questionNum} 
+                    maxTime={maxTime} 
+                    className={currentTopic} 
+                    ref={progressRef} />
             </section>
         </>
     );
