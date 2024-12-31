@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 
 import { MealsContext } from "../store/meals-context.jsx";
 import { validateInputData } from "../util/validation.js";
+import { sendUserData } from "../http.js";
 
 export default function UserModal({ ref }) {
 
@@ -22,22 +23,38 @@ export default function UserModal({ ref }) {
         }
     });
 
+    const { items, resetOrders } = useContext(MealsContext);
+
+    const orderedMeals = items.filter((meal) => meal.ordered);
+    const totalAmount = orderedMeals.reduce((runningSum, meal) => runningSum + (meal.ordered * Number(meal.price)), 0).toFixed(2);
+
     async function submitOrderAction(prevFormState, fd) {
 
-        const data = Object.fromEntries(fd.entries());
-        const newFormState = validateInputData(data);
+        const customerData = Object.fromEntries(fd.entries());
+        const newFormState = validateInputData(customerData);
         if (newFormState.errors) {
             return newFormState;
         }
 
+        try {
+            await sendUserData(customerData, orderedMeals);
+
+        } catch(error) {
+            console.log(error.message);
+        }
+
+        resetOrders();
+        dialogRef.current.close();
+        return newFormState;
         
     }
+
     const [ formState, formAction, pending ] = useActionState(submitOrderAction, { errors: null });
 
     return createPortal(
         <dialog className="modal" ref={dialogRef}>
             <h2>Checkout</h2>
-            <p>Total Amount: ${"<price>"}</p>
+            <p>Total Amount: ${totalAmount}</p>
             <form action={formAction}>
                 <p className="control"> 
                     <label htmlFor="fullName">Full Name</label>

@@ -7,6 +7,7 @@ export const MealsContext = createContext({
     items: [],
     addMealToCart: () => {},
     removeMealFromCart: () => {},
+    resetOrders: () => {},
     isLoading: false,
     error: null
 });
@@ -51,6 +52,11 @@ function mealReducer(state, action) {
         }
         return { ...state, items: newMeals};
     }
+
+    if (action.type === "RESET_ORDERS") {
+        const newMeals = state.items.map((meal) => ({ ...meal, ordered: false }));
+        return { ...state, items: newMeals};
+    }
 }
 
 export default function MealsContextProvider({ children }) {
@@ -93,10 +99,17 @@ export default function MealsContextProvider({ children }) {
         });
     }
 
+    function resetOrders() {
+        mealDispatch({
+            type: "RESET_ORDERS",
+        })
+    }
+
     const ctxValue = {
         ...mealsState,
         addMealToCart,
         removeMealFromCart,
+        resetOrders,
     }
 
     return (

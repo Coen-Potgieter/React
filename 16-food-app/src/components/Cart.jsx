@@ -24,11 +24,12 @@ export default function Cart({ ref, onCheckout }) {
     const { items, addMealToCart, removeMealFromCart } = useContext(MealsContext);
     const orderedMeals = items.filter((meal) => meal.ordered);
     const totalAmount = orderedMeals.reduce((runningSum, meal) => runningSum + (meal.ordered * Number(meal.price)), 0).toFixed(2);
+    const disableButton = (orderedMeals.length === 0);
 
     return createPortal(
         <dialog className="modal" ref={dialogRef}>
             <div className="cart">
-                <h2>Cart</h2>
+                <h2>Your Cart</h2>
                 <ul>
                     {orderedMeals.map((meal) => (
                         <li key={meal.id} className="cart-item">
@@ -57,7 +58,7 @@ export default function Cart({ ref, onCheckout }) {
                     <button className="text-button" onClick={closeModal}>
                         Close
                     </button>
-                    <button className="button" onClick={onCheckout}>
+                    <button className="button" onClick={onCheckout} disabled={disableButton}>
                         Go to Checkout
                     </button>
                 </div>
