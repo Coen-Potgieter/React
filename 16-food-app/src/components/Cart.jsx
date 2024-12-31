@@ -1,9 +1,9 @@
-import { useImperativeHandle, useRef, useContext, useEffect } from "react";
+import { useImperativeHandle, useRef, useContext } from "react";
 import { createPortal } from "react-dom";
 
 import { MealsContext } from "../store/meals-context.jsx";
 
-export default function Cart({ ref }) {
+export default function Cart({ ref, onCheckout }) {
 
     const dialogRef = useRef();
     function closeModal() {
@@ -13,6 +13,9 @@ export default function Cart({ ref }) {
         return {
             open() {
                 dialogRef.current.showModal();
+            },
+            close() {
+                dialogRef.current.close();
             }
         }
     })
@@ -54,7 +57,7 @@ export default function Cart({ ref }) {
                     <button className="text-button" onClick={closeModal}>
                         Close
                     </button>
-                    <button className="button">
+                    <button className="button" onClick={onCheckout}>
                         Go to Checkout
                     </button>
                 </div>

@@ -206,6 +206,11 @@ h1 {
     gap: 1rem;
 }
 
+.error-control {
+    color: #FF5861;
+    font-weight: bold;
+}
+
 .button {
     font: inherit;
     cursor: pointer;
