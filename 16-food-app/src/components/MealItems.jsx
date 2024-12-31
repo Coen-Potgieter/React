@@ -1,33 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { MealsContext } from "../store/meals-context.jsx";
 
-import { fetchMeals } from "../http.js";
+import MealItem from "./MealItem.jsx";
 
 export default function MealItems() {
 
-    const [ meals, setMeals ] = useState(null);
-    const [ error, setError ] = useState(null);
-
-    useEffect(() => {
-
-        async function getMeals() {
-            try{
-                const meals = await fetchMeals();
-                setMeals(meals);
-
-                console.log(meals);
-
-            } catch(error) {
-                setError(error.message);
-            }
-        }
-
-        getMeals();
-    }, []);
+    const { items, isLoading, error, addMealToCart } = useContext(MealsContext);
 
     return (
-        <>
-            {meals && <p> MEALS HAVE LAODED!!!</p>}
-            {error && <p>{error}</p>}
-        </>
+        <section id="meals">
+            {items.length > 0 && items.map((meal) => (
+                <MealItem key={meal.id} meal={meal} onOrder={addMealToCart} />
+            ))}
+
+            {error && <p>{error}</p>} 
+            {isLoading && <p>currently loading</p>} 
+        </section>
     );
 }

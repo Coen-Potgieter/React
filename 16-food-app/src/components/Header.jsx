@@ -1,13 +1,17 @@
 
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 
 import Cart from "./Cart.jsx";
 import logoImg from "../assets/logo.jpg";
+import { MealsContext } from "../store/meals-context.jsx";
 
 
 export default function Header() {
 
     const cartRef = useRef();
+
+    const { items } = useContext(MealsContext);
+    const numMealsOrdered = items.reduce((orderCount, meal) =>  (!meal.ordered) ? orderCount : orderCount + meal.ordered, 0);
 
     function openCart() {
         cartRef.current.open();
@@ -23,10 +27,10 @@ export default function Header() {
             </div>
 
             <button 
-                className="button" 
+                className="text-button" 
                 onClick={openCart}
             >
-                Cart
+                Cart {(!numMealsOrdered) ? "" : `(${numMealsOrdered})`}
             </button>
             <Cart ref={cartRef}/>
 
