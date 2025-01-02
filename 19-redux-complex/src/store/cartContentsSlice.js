@@ -1,19 +1,25 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
-    items: []
+    items: [],
+    changed: false,
 }
 const cartContentsSlice = createSlice({
     name: "cartContents",
     initialState,
     reducers: {
+
+        replaceCart(state, action) {
+            state.items = action.payload;
+        },
         addItemToCart(state, action) {
             const newItem = action.payload;
             const cartItemIdx = state.items.findIndex((item) => {
                 if ( item.title === newItem.title 
-                        && item.price === newItem.price 
-                        && item.description === newItem.description
+                    && item.price === newItem.price 
+                    && item.description === newItem.description
                 ) { return true; }
                 return false;
             })
@@ -24,14 +30,15 @@ const cartContentsSlice = createSlice({
             } else {
                 state.items[cartItemIdx].quantity += 1;
             }
+            state.changed = true;
         },
 
         removeItemFromCart(state, action) {
             const newItem = action.payload;
             const cartItemIdx = state.items.findIndex((item) => {
                 if ( item.title === newItem.title 
-                        && item.price === newItem.price 
-                        && item.description === newItem.description
+                    && item.price === newItem.price 
+                    && item.description === newItem.description
                 ) { return true; }
                 return false;
             })
@@ -41,9 +48,11 @@ const cartContentsSlice = createSlice({
             } else {
                 state.items[cartItemIdx].quantity -= 1;
             }
+            state.changed = true;
         }
     }
 })
+
 
 export const cartContentsActions = cartContentsSlice.actions;
 export default cartContentsSlice.reducer;

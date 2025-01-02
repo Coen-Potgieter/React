@@ -5,31 +5,52 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from "./components/UI/Notification"
-import { sendCartData, fetchCartData } from "./store/cart-actions";
+import backendURL from "./util/backendURL";
+import { cartShowingActions } from "./store/cartShowingSlice";
 
 let isInitial = true;
 
 function App() {
 
     const cartItems = useSelector((state) => state.cartContents.items);
-    const cartChanged = useSelector((state) => state.cartContents.changed);
     const dispatch = useDispatch();
     const notification = useSelector((state) => state.cartShowing.notification);
 
     useEffect(() => {
-        dispatch(fetchCartData());
-    }, [dispatch]);
+        async function sendCartData() {
+            dispatch(cartShowingActions.showNotification({
+                status: "pending",
+                title: "Sending...",
+                message: "Sending Cart Data",
+            }));
+            const response = await fetch(backendURL + "/cart.json", {
+                method: "PUT",
+                body: JSON.stringify(cartItems),
+            });
 
-    useEffect(() => {
+            if (!response.ok) {
+                throw new Error("Sedning Cart Data Failed")
+            }
+
+            dispatch(cartShowingActions.showNotification({
+                status: "success",
+                title: "Success",
+                message: "Sent Cart Data Successfully",
+            }));
+        }
 
         if (isInitial) {
             isInitial = false;
             return;
         }
 
-        if (cartChanged){
-            dispatch(sendCartData(cartItems));
-        }
+        sendCartData().catch((error) => {
+            dispatch(cartShowingActions.showNotification({
+                status: "error",
+                title: "Error",
+                message: "Sending Cart Data Failed",
+            }));
+        });
 
     }, [cartItems, dispatch]);
 
